@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+  
+{% load static %}
+{% load poll_extras %}
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- ===============================================-->
+    <!--    Document Title-->
+    <!-- ===============================================-->
+    <title>Innoovatum | {{user.username}}</title>
+
+
+    <!-- ===============================================-->
+    <!--    Favicons-->
+    <!-- ===============================================-->
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'main/assets/img/favicons/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'main/assets/img/favicons/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'main/assets/img/favicons/favicon-16x16.png' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'main/assets/img/favicons/favicon.ico' %}">
+    <link rel="manifest" href="{% static 'main/assets/img/favicons/manifest.json' %}">
+    <meta name="msapplication-TileImage" content="{% static 'main/assets/img/favicons/mstile-150x150.png' %}">
+    <meta name="theme-color" content="#ffffff">
+    <script src="{% static 'main/assets/js/config.js' %}"></script>
+    <script src="{% static 'main/vendors/overlayscrollbars/OverlayScrollbars.min.js' %}"></script>
+
+
+    <!-- ===============================================-->
+    <!--    Stylesheets-->
+    <!-- ===============================================-->
+    <link href="{% static 'main/vendors/glightbox/glightbox.min.css' %}" rel="stylesheet">
+    <link href="{% static 'main/vendors/plyr/plyr.css' %}" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700%7cPoppins:300,400,500,600,700,800,900&amp;display=swap" rel="stylesheet">
+    <link href="{% static 'main/vendors/overlayscrollbars/OverlayScrollbars.min.css' %}" rel="stylesheet">
+    
+    <link href="{% static 'main/assets/css/theme.min.css' %}" rel="stylesheet" id="style-default">
+    
+    <link href="{% static 'main/assets/css/user.min.css' %}" rel="stylesheet" id="user-style-default">
+
+    <style>
+      .like_active{
+  color:#ff4500;
+  
+}
+
+
+    </style>
+  </head>
+
+
+  <body>
+
+    <!-- ===============================================-->
+    <!--    Main Content-->
+    <!-- ===============================================-->
+    <main class="main" id="top">
+      <div class="container" data-layout="container">
+        <script>
+          var isFluid = JSON.parse(localStorage.getItem('isFluid'));
+          if (isFluid) {
+            var container = document.querySelector('[data-layout]');
+            container.classList.remove('container');
+            container.classList.add('container-fluid');
+          }
+        </script>
+        <nav class="navbar navbar-light navbar-vertical navbar-expand-xl">
+          <script>
+            var navbarStyle = localStorage.getItem("navbarStyle");
+            if (navbarStyle && navbarStyle !== 'transparent') {
+              document.querySelector('.navbar-vertical').classList.add(`navbar-${navbarStyle}`);
+            }
+          </script>
+          <div class="d-flex align-items-center">
+            <div class="toggle-icon-wrapper">
+
+              <button class="btn navbar-toggler-humburger-icon navbar-vertical-toggle" data-bs-toggle="tooltip" data-bs-placement="left" title="Toggle Navigation"><span class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
+
+            </div><a class="navbar-brand" href="/">
+              <div class="d-flex align-items-center py-3">
+                <img class="me-2" src="{% static 'main/assets/img/icons/innoo.png' %}" alt="" width="40" />
+                <!--<span class="font-sans-serif">Innoovatum</span>-->
+              </div>
+            </a>
+          </div>
+          <div class="collapse navbar-collapse" id="navbarVerticalCollapse">
+            <div class="navbar-vertical-content scrollbar">
+              <ul class="navbar-nav flex-column mb-0" id="navbarVerticalNav">
+                <li class="nav-item">
+                  <!-- label-->
+                  <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
+                    <div class="col-auto navbar-vertical-label">App
+                    </div>
+                    <div class="col ps-0">
+                      <hr class="mb-0 navbar-vertical-divider" />
+                    </div>
+                  </div>
+                  <!-- parent pages--><a class="nav-link" href="./app/calendar.html" role="button" aria-expanded="false">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-monument"></span></span><span class="nav-link-text ps-1">Blueprint | Mentoring</span>
+                    </div>
+                  </a>
+                  <!-- parent pages--><a class="nav-link" href="./app/chat.html" role="button" aria-expanded="false">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-hourglass-start"></span></span><span class="nav-link-text ps-1">StartUp Support</span>
+                    </div>
+                  </a>
+                  <!-- parent pages--><a class="nav-link" href="./app/chat.html" role="button" aria-expanded="false">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-project-diagram"></span></span><span class="nav-link-text ps-1">Projects</span>
+                    </div>
+                  </a>
+                  <!-- parent pages--><a class="nav-link" href="./app/chat.html" role="button" aria-expanded="false">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-network-wired"></span></span><span class="nav-link-text ps-1">Workshops</span>
+                    </div>
+                  </a>
+                  <!-- parent pages--><a class="nav-link" href="./app/chat.html" role="button" aria-expanded="false">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-head-side-virus"></span></span><span class="nav-link-text ps-1">About Us</span>
+                    </div>
+                  </a>
+                  <!-- parent pages--><a class="nav-link" href="./app/chat.html" role="button" aria-expanded="false">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-mail-bulk"></span></span><span class="nav-link-text ps-1">Contact Us</span>
+                    </div>
+                  </a>
+                  
+                  <!-- parent pages--><a class="nav-link dropdown-indicator" href="#events" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="events">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-calendar-day"></span></span><span class="nav-link-text ps-1">Events</span>
+                    </div>
+                  </a>
+                  <ul class="nav collapse false" id="events">
+                    <li class="nav-item"><a class="nav-link" href="./app/events/create-an-event.html" aria-expanded="false">
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Create an event</span>
+                        </div>
+                      </a>
+                      <!-- more inner pages-->
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="./app/events/event-detail.html" aria-expanded="false">
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Event detail</span>
+                        </div>
+                      </a>
+                      <!-- more inner pages-->
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="./app/events/event-list.html" aria-expanded="false">
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Event list</span>
+                        </div>
+                      </a>
+                      <!-- more inner pages-->
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+        <div class="content">
+          <nav class="navbar navbar-light navbar-glass navbar-top navbar-expand">
+
+            <button class="btn navbar-toggler-humburger-icon navbar-toggler me-1 me-sm-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalCollapse" aria-controls="navbarVerticalCollapse" aria-expanded="false" aria-label="Toggle Navigation"><span class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
+            <a class="navbar-brand me-1 me-sm-3" href="/">
+              <div class="d-flex align-items-center">
+                <img class="me-2" src="{% static 'main/assets/img/icons/innoo.png' %}" alt="" width="40" />
+               <!-- <img class="me-2" src="./assets/img/icons/spot-illustrations/falcon.png" alt="" width="25" />
+                <span class="font-sans-serif">I->E</span>-->
+              </div>
+            </a>
+            <ul class="navbar-nav align-items-center d-none d-lg-block">
+              <li class="nav-item">
+                
+              </li>
+            </ul>
+            <ul class="navbar-nav navbar-nav-icons ms-auto flex-row align-items-center">
+
+              
+
+              <li class="nav-item">
+                <div class="theme-control-toggle fa-icon-wait px-2">
+                  <input class="form-check-input ms-0 theme-control-toggle-input" id="themeControlToggle" type="checkbox" data-theme-control="theme" value="dark" />
+                  <label class="mb-0 theme-control-toggle-label theme-control-toggle-light" for="themeControlToggle" data-bs-toggle="tooltip" data-bs-placement="left" title="Switch to light theme"><span class="fas fa-sun fs-0"></span></label>
+                  <label class="mb-0 theme-control-toggle-label theme-control-toggle-dark" for="themeControlToggle" data-bs-toggle="tooltip" data-bs-placement="left" title="Switch to dark theme"><span class="fas fa-moon fs-0"></span></label>
+                </div>
+              </li>
+
+            
+
+              
+              {% if request.user.is_authenticated %}
+
+              <li class="nav-item">
+                <div class="theme-control-toggle fa-icon-wait px-2">
+                  <a href="/feeds">
+                  <label class="mb-0 theme-control-toggle-label" title="Go To Feeds"><span class="fas fab fa-readme fs-0"></span></label>
+                </a>
+                </div>
+              </li>
+              
+              <li class="nav-item dropdown">
+                <a class="nav-link notification-indicator notification-indicator-primary px-0 fa-icon-wait" id="navbarDropdownNotification" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-bell" data-fa-transform="shrink-6" style="font-size: 33px;"></span></a>
+                <div class="dropdown-menu dropdown-menu-end dropdown-menu-card dropdown-menu-notification" aria-labelledby="navbarDropdownNotification">
+                  <div class="card card-notification shadow-none">
+                    <div class="card-header">
+                      <div class="row justify-content-between align-items-center">
+                        <div class="col-auto">
+                          <h6 class="card-header-title mb-0">Notifications</h6>
+                        </div>
+                        <div class="col-auto ps-0 ps-sm-3"><a class="card-link fw-normal" href="#">Mark all as read</a></div>
+                      </div>
+                    </div>
+                    <div class="scrollbar-overlay" style="max-height:19rem">
+                      <div class="list-group list-group-flush fw-normal fs--1">
+                        <div class="list-group-title border-bottom">NEW</div>
+                        <div class="list-group-item">
+                          <a class="notification notification-flush notification-unread" href="#!">
+                            <div class="notification-avatar">
+                              <div class="avatar avatar-2xl me-3">
+                                <img class="rounded-circle" src="{{request.user.profile.profile_pic.url}}" alt="" />
+
+                              </div>
+                            </div>
+                            <div class="notification-body">
+                              <a  href="#" onclick="showNotifications()"
+                        id=""
+                        data-container="body"
+                        data-toggle="popover" 
+                        data-placement="top" 
+                        data-container="body"
+                        title="Notifications <a href='#' class='float-right pl-1'><small id='clear_notifications'>Clear</small></a>"
+                        data-html="true"
+                        data-content="<div id = 'notifications'>please wait ...</div>"
+                        >
+                          &nbsp; &nbsp; <abbr title="Notifications"><i class="fa fa-bell" aria-hidden="true"></i></abbr>
+                        </a>
+                            </div>
+                          </a>
+
+                        </div>
+                        
+                        
+                      </div>
+                    </div>
+                    <!--<div class="card-footer text-center border-top"><a class="card-link d-block" href="./app/social/notifications.html">View all</a></div>-->
+                  </div>
+                </div>
+
+              </li>
+              <li class="nav-item dropdown"><a class="nav-link pe-0" id="navbarDropdownUser" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <div class="avatar avatar-xl">
+                    <img class="rounded-circle" src="{{request.user.profile.profile_pic.url}}" alt="{% url 'profile' request.user.username%}" />
+
+                  </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end py-0" aria-labelledby="navbarDropdownUser">
+                  <div class="bg-white dark__bg-1000 rounded-2 py-2">
+                  
+                    <a class="dropdown-item" href="{% url 'profile' request.user.username%}">Profile &amp; account</a>
+                  
+
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'profile' request.user.username%}#changePass">Settings</a>
+                    <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                  </div>
+                </div>
+              </li>
+             {% else %}
+
+             <li class="nav-item dropdown"><a class="nav-link pe-0" id="navbarDropdownUser" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <div class="avatar avatar-xl">
+                <div class="theme-control-toggle fa-icon-wait">
+                  <label class="mb-0 theme-control-toggle-label" title="Go To Feeds"><span class="far fa-user fs-0"></span></label>
+                </div>
+
+              </div>
+            </a>
+            <div class="dropdown-menu dropdown-menu-end py-0" aria-labelledby="navbarDropdownUser">
+              <div class="bg-white dark__bg-1000 rounded-2 py-2">
+                <a class="dropdown-item" href="{% url 'login' %}">Login</a>
+                 <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="{% url 'signup' %}">Register</a>
+                
+              </div>
+            </div>
+          </li>
+
+              {% endif %}
+            </ul>
+          </nav>
+          <div class="row g-3">
+            <div class="col-lg-8">
+              <div class="card mb-3">
+                <div class="card-header bg-light overflow-hidden">
+                  <div class="d-flex align-items-center">
+                    <div class="avatar avatar-2xl">
+                      <img class="rounded-circle" src="{{request.user.profile.profile_pic.url}}" alt="" style="width: 40px" height="40px"/>
+
+                    </div>
+                    <div class="flex-1 ms-2">
+                      <h5 class="mb-0 fs-0">Create post</h5>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body p-0">
+                  <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="file" accept="image/*" name="post_image" id="add_post_image" style="visibility: hidden;">
+                    <textarea class="shadow-none form-control rounded-0 resize-none px-card border-y-0 border-200" placeholder="What do you want to talk about?" rows="4" name="post_text" required></textarea>
+                    <div class="d-flex align-items-center ps-card border border-200">
+                      <label class="text-nowrap mb-0 me-2" for="hash-tags"><span class="fas fa-plus me-1 fs--2"></span><span class="fw-medium fs--1">Add hashtag</span></label>
+                      <input class="form-control border-0 fs--1 shadow-none" id="hash-tags" type="text" placeholder="Help the right person to see" />
+                    </div>
+                    <div class="row g-0 justify-content-between mt-3 px-card pb-3">
+                      <div class="col">
+                        <a class="btn btn-light btn-sm rounded-pill shadow-none d-inline-flex align-items-center fs--1 mb-0 me-1" onclick="$('#add_post_image').click()"><img class="cursor-pointer" src="{% static 'main/assets/img/icons/spot-illustrations/image.svg'%}" width="17" alt="" /><span class="ms-2 d-none d-md-inline-block">Image</span></a>
+                        <button class="btn btn-light btn-sm rounded-pill shadow-none d-inline-flex align-items-center fs--1 me-1" type="button"><img class="cursor-pointer" src="{% static 'main/assets/img/icons/spot-illustrations/calendar.svg'%}" width="17" alt="" /><span class="ms-2 d-none d-md-inline-block">Event</span></button>
+                       <!-- <button class="btn btn-light btn-sm rounded-pill shadow-none d-inline-flex align-items-center fs--1 me-1" type="button"><img class="cursor-pointer" src="{% static 'main/assets/img/icons/spot-illustrations/location.svg'%}" width="17" alt="" /><span class="ms-2 d-none d-md-inline-block text-nowrap">Check in</span></button>-->
+                      </div>
+                      <div class="col-auto">
+                        <!--<div class="dropdown d-inline-block me-1">
+                          <button class="btn btn-sm dropdown-toggle px-1" id="dropdownMenuButton" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-globe-americas"></span></button>
+                          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton"><a class="dropdown-item" href="#">Public</a><a class="dropdown-item" href="#">Private</a><a class="dropdown-item" href="#">Draft</a></div>
+                        </div>-->
+                        <button class="btn btn-primary btn-sm px-4 px-sm-5" type="submit">Post</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+
+
+              {% for post in posts %}
+            <!-- Post Code Starts here-->
+
+
+
+
+              <div class="card mb-3" id="post{{post.id}}">
+                <div class="card-header bg-light">
+                  <div class="row justify-content-between">
+                    <div class="col">
+                      <div class="d-flex">
+                        <div class="avatar avatar-2xl">
+                          <img class="rounded-circle" src="{{post.user.profile.profile_pic.url}}" alt="" />
+
+                        </div>
+                        <div class="flex-1 align-self-center ms-2">
+                          <p class="mb-1 lh-1"><a class="fw-semi-bold" href="{% url 'profile' post.user.username %}">{{post.user.username}} </a></p>
+                          <p class="mb-0 fs--1">{{post.created_at|timesince}} ago <span class="fas far fa-clock"></span></p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-auto">
+                      <div class="dropdown font-sans-serif">
+                        <button class="btn btn-sm dropdown-toggle p-1 dropdown-caret-none" type="button" id="post-article-action" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-ellipsis-h fs--1"></span></button>
+
+                        <div class="dropdown-menu dropdown-menu-end py-3" aria-labelledby="post-article-action">
+                          {% if post.user == request.user %}
+                          <a class="dropdown-item" href="#!">Edit</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item" onclick="Post('delete',
+                          '{{post.id}}')">Delete </a>
+                          {% endif %}
+                          <a class="dropdown-item" href="#!">Report</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  {% if post.post_picture %}
+                  <img class="img-fluid rounded" src="{{post.post_picture.url}}" alt="" />
+                  {% endif %}
+                  
+                  <p class="mt-3 ">{{post.post_text |safe|truncatewords:"40"|linebreaks}} <a class="mt-0" href="{% url 'post_detail' post.id  %}">see More</a></p>
+                  
+                </div>
+                <div class="card-footer bg-light pt-0">
+                  <div class="border-bottom border-200 fs--1 py-3"><a class="text-700" href="#">{{post.likes.count}} Likes</a>
+                  </div>
+                  <div class="row g-0 fw-semi-bold text-center py-2 fs--1">
+                    <div class="col-auto">
+                      <a class="rounded-2 d-flex align-items-center me-3 text-700">
+                    <p  {% if request.user in post.likes.all %}
+          class="card-link m-auto like_active click" onclick="Post('like-back',
+          '{{post.id}}')"
+          {% else %}
+          class="card-link m-auto click" onclick="Post('like', '{{post.id}}')"
+          {% endif %}>
+
+          <i class="fas fa-heart" style="font-size: 16px;"></i><span class="ms-1"> Like</span> </p>
+          </a>
+                      
+                    </div>
+                    
+                    <div class="col-auto">
+                      <a class="rounded-2 d-flex align-items-center me-3" data-bs-toggle="collapse" data-bs-target="#collapseExamplepost{{post.id}}comments" aria-expanded="false" aria-controls="collapseExamplepost{{post.id}}comments">
+                      <i class="far fa-comment" style="font-size: 17px;"></i><span class="ms-1"> Comment</span></a>
+                    </div>
+
+                    
+
+                    <div class="col-auto d-flex align-items-center"><a class="rounded-2 text-700 d-flex align-items-center" href="#!">
+                      <img src="{% static 'main/assets/img/icons/spot-illustrations/share-inactive.png' %}" width="20" alt="" /><span class="ms-1">Share</span></a>
+                    </div>
+                  
+          <!--Comment section toggle-->
+
+          <div class="collapse mt-4" id="collapseExamplepost{{post.id}}comments">
+            
+            <form class="d-flex align-items-center border-top border-200 pt-3">
+              <div class="avatar avatar-xl">
+                <img class="rounded-circle" src="{{post.user.profile.profile_pic.url}}" alt="" />
+
+              </div>
+              <!--Input form here-->
+
+              <div class="input-group">
+                <input class="form-control rounded-pill ms-2 fs--1" type="text" aria-label="Write a Comment"
+                placeholder="Write a Comment..." id="comment_text_of_{{post.id}}" /><button class="input-group-text rounded-pill ms-2 fs--1 text-primary bg-white" id="basic-addon1" onclick="addComment('{{post.id}}',
+                'comment_text_of_{{post.id}}', 'comments_of_post{{post.id}}')"><i class="fa fa-paper-plane"
+                  aria-hidden="true"></i></button>
+              </div>
+
+
+              <!--End Input form here-->
+            </form>
+
+            {% for comment in post.id|comments %}
+
+            <div class="d-flex mt-3" id="comments_of_post{{post.id}}">
+              <div class="avatar avatar-xl">
+                <img class="rounded-circle" src="{{comment.0.user.profile.profile_pic.url}}" alt="" />
+
+              </div>
+              <div class="flex-1 ms-2 fs--1" style="text-align: left;">
+                <p class="mb-1 bg-200 rounded-3 p-2"><a class="fw-semi-bold" href="{% url 'profile' comment.0.user.username %}">@{{comment.0.user.get_full_name}}</a> {{comment.0.comm}}</p>
+                <div class="px-2" id="comment{{comment.0.id}}"> 
+                  <a href="#!" onclick="CommentReplyForm('comment{{comment.0.id}}',
+                  '{{comment.0.id}}', 
+                  '{{request.user.profile.profile_pic.url}}')">Reply</a> &bull; {{comment.0.time | timesince}} ago 
+                </div>
+                <div class="px-2" id="comment{{comment.0.id}}replys"> 
+                  
+                  {% for subcomment in comment.1 %}
+
+                  <div class="d-flex mt-3">
+                    <div class="avatar avatar-xl">
+                      <img class="rounded-circle" src="{{subcomment.user.profile.profile_pic.url}}" alt="" />
+
+                    </div>
+                    <div class="flex-1 ms-2 fs--1">
+                      <p class="mb-1 bg-200 rounded-3 p-2"><a class="fw-semi-bold" href="{% url 'profile' subcomment.user.username %}">@{{subcomment.user.get_full_name}}</a> {{subcomment.comm}}</p>
+                      <div class="px-2"><a href="#!" onclick="CommentReplyForm('comment{{comment.1.id}}',
+                        '{{comment.1.id}}', 
+                        '{{request.user.profile.profile_pic.url}}')">Reply</a> &bull; {{ subcomment.time |timesince }} ago</div>
+                    </div>
+                  </div>
+                
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+
+
+          </div>
+        </div>
+          </div>
+           
+
+          <!--End of comment section toggle-->
+   </div>
+
+<!-- Post Code Ends here-->
+{% endfor %}
+     
+            </div>
+
+
+            <div class="col-lg-4">
+              <!--<div class="card mb-3">
+                <div class="card-body fs--1">
+                  <div class="d-flex"><span class="fas fa-gift fs-0 text-warning"></span>
+                    <div class="flex-1 ms-2"><a class="fw-semi-bold" href="../../pages/user/profile.html">Emma Watson</a>'s Birthday is today</div>
+                  </div>
+                </div>
+              </div>-->
+              <div class="card mb-3">
+                <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                  <h5 class="mb-0">Add to your feed</h5><a class="fs--1" href="#!">See all</a>
+                </div>
+                <div class="card-body">
+                
+                  {% for usr in non_followed_user %}
+
+                
+                  <div class="d-flex">
+                    <div class="avatar avatar-3xl">
+                      <a href="{% url 'profile' usr %}">
+                      <img class="rounded-circle" src="{{usr.profile.profile_pic.url}}" alt="" /></a>
+
+                    </div>
+                    <div class="flex-1 ms-2">
+                      <h6 class="fs-0 mb-0"><a href="{% url 'profile' usr %}">{{usr.get_full_name}}</a></h6>
+                      <p class="text-1000 mb-0" style="font-size: 14px;">{{usr.profile.profile_about_me}}</p>
+                      <button class="btn btn-light btn-sm py-0 mt-1 border" onclick="Follow(this, '{{usr}}')" <span class="fas fa-user-plus" data-fa-transform="shrink-5 left-2"></span><span class="fs--1"></span>
+                        {% if usr in request.user.profile.followers.all %}
+                        Follow Back
+                        {% else %}
+                        Follow
+                        {% endif %}
+                      </button>
+                    
+                      <div class="border-dashed-bottom my-3"></div>
+                    </div>
+                  </div>
+                  {% endfor %}
+
+
+                </div>
+              </div>
+              <div class="card mb-3 mb-lg-0">
+                <div class="card-header bg-light">
+                  <h5 class="mb-0">You may interested</h5>
+                </div>
+                <div class="card-body fs--1">
+                  <div class="d-flex btn-reveal-trigger">
+                    <div class="calendar"><span class="calendar-month">Feb</span><span class="calendar-day">21</span></div>
+                    <div class="flex-1 position-relative ps-3">
+                      <h6 class="fs-0 mb-0"><a href="../../app/events/event-detail.html">Newmarket Nights</a></h6>
+                      <p class="mb-1">Organized by <a href="#!" class="text-700">University of Oxford</a></p>
+                      <p class="text-1000 mb-0">Time: 6:00AM</p>
+                      <p class="text-1000 mb-0">Duration: 6:00AM - 5:00PM</p>Place: Cambridge Boat Club, Cambridge
+                      <div class="border-dashed-bottom my-3"></div>
+                    </div>
+                  </div>
+                  <div class="d-flex btn-reveal-trigger">
+                    <div class="calendar"><span class="calendar-month">Dec</span><span class="calendar-day">31</span></div>
+                    <div class="flex-1 position-relative ps-3">
+                      <h6 class="fs-0 mb-0"><a href="../../app/events/event-detail.html">31st Night Celebration</a></h6>
+                      <p class="mb-1">Organized by <a href="#!" class="text-700">Chamber Music Society</a></p>
+                      <p class="text-1000 mb-0">Time: 11:00PM</p>
+                      <p class="text-1000 mb-0">280 people interested</p>Place: Tavern on the Greend, New York
+                      <div class="border-dashed-bottom my-3"></div>
+                    </div>
+                  </div>
+                  <div class="d-flex btn-reveal-trigger">
+                    <div class="calendar"><span class="calendar-month">Dec</span><span class="calendar-day">16</span></div>
+                    <div class="flex-1 position-relative ps-3">
+                      <h6 class="fs-0 mb-0"><a href="../../app/events/event-detail.html">Folk Festival</a></h6>
+                      <p class="mb-1">Organized by <a href="#!" class="text-700">Harvard University</a></p>
+                      <p class="text-1000 mb-0">Time: 9:00AM</p>
+                      <p class="text-1000 mb-0">Location: Cambridge Masonic Hall Association</p>Place: Porter Square, North Cambridge
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer bg-light p-0 border-top"><a class="btn btn-link d-block w-100" href="../../app/events/event-list.html">All Events<span class="fas fa-chevron-right ms-1 fs--2"></span></a></div>
+              </div>
+            </div>
+          </div>
+          <footer class="footer">
+            <div class="row g-0 justify-content-between fs--1 mt-4 mb-3">
+              <div class="col-12 col-sm-auto text-center">
+                <p class="mb-0 text-600">Making Engineering Education A Practical Approach <span class="d-none d-sm-inline-block">| </span><br class="d-sm-none" /> 2022 &copy; <a href="https://innoovatum.com">Innoovatum</a></p>
+              </div>
+              
+            </div>
+          </footer>
+        </div>
+        <div class="modal fade" id="authentication-modal" tabindex="-1" role="dialog" aria-labelledby="authentication-modal-label" aria-hidden="true">
+          <div class="modal-dialog mt-6" role="document">
+            <div class="modal-content border-0">
+              <div class="modal-header px-5 position-relative modal-shape-header bg-shape">
+                <div class="position-relative z-index-1 light">
+                  <h4 class="mb-0 text-white" id="authentication-modal-label">Register</h4>
+                  <p class="fs--1 mb-0 text-white">Please create your free Falcon account</p>
+                </div>
+                <button class="btn-close btn-close-white position-absolute top-0 end-0 mt-2 me-2" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body py-4 px-5">
+                <form>
+                  <div class="mb-3">
+                    <label class="form-label" for="modal-auth-name">Name</label>
+                    <input class="form-control" type="text" autocomplete="on" id="modal-auth-name" />
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label" for="modal-auth-email">Email address</label>
+                    <input class="form-control" type="email" autocomplete="on" id="modal-auth-email" />
+                  </div>
+                  <div class="row gx-2">
+                    <div class="mb-3 col-sm-6">
+                      <label class="form-label" for="modal-auth-password">Password</label>
+                      <input class="form-control" type="password" autocomplete="on" id="modal-auth-password" />
+                    </div>
+                    <div class="mb-3 col-sm-6">
+                      <label class="form-label" for="modal-auth-confirm-password">Confirm Password</label>
+                      <input class="form-control" type="password" autocomplete="on" id="modal-auth-confirm-password" />
+                    </div>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="modal-auth-register-checkbox" />
+                    <label class="form-label" for="modal-auth-register-checkbox">I accept the <a href="#!">terms </a>and <a href="#!">privacy policy</a></label>
+                  </div>
+                  <div class="mb-3">
+                    <button class="btn btn-primary d-block w-100 mt-3" type="submit" name="submit">Register</button>
+                  </div>
+                </form>
+                <div class="position-relative mt-5">
+                  <hr class="bg-300" />
+                  <div class="divider-content-center">or register with</div>
+                </div>
+                <div class="row g-2 mt-2">
+                  <div class="col-sm-6"><a class="btn btn-outline-google-plus btn-sm d-block w-100" href="#"><span class="fab fa-google-plus-g me-2" data-fa-transform="grow-8"></span> google</a></div>
+                  <div class="col-sm-6"><a class="btn btn-outline-facebook btn-sm d-block w-100" href="#"><span class="fab fa-facebook-square me-2" data-fa-transform="grow-8"></span> facebook</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- ===============================================-->
+    <!--    End of Main Content-->
+    <!-- ===============================================-->
+
+
+    
+
+
+    <!-- ===============================================-->
+    <!--    JavaScripts-->
+    <!-- ===============================================-->
+    <script src="{% static 'main/vendors/popper/popper.min.js' %}"></script>
+    <script src="{% static 'main/vendors/bootstrap/bootstrap.min.js' %}"></script>
+    <script src="{% static 'main/vendors/anchorjs/anchor.min.js' %}"></script>
+    <script src="{% static 'main/vendors/is/is.min.js' %}"></script>
+    <script src="{% static 'main/vendors/glightbox/glightbox.min.js' %}"></script>
+    <script src="{% static 'main/vendors/plyr/plyr.polyfilled.min.js' %}"></script>
+    <script src="{% static 'main/vendors/fontawesome/all.min.js' %}"></script>
+    <script src="{% static 'main/vendors/lodash/lodash.min.js' %}"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+    <script src="{% static 'main/vendors/list.js/list.min.js' %}"></script>
+    <script src="{% static 'main/assets/js/theme.js' %}"></script>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static 'main/js/ajax.js' %}"></script>
+    <script type="text/javascript" src="{% static 'main/js/main.js' %}"></script>
+    
+    
+
+  </body>
+
+</html>

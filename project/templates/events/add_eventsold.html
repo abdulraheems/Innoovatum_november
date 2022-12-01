@@ -1,0 +1,16 @@
+{% if alert %}
+    {% for mess in alert %}
+    <div class="alert alert-{{mess.tags}} border-2 d-flex align-items-center" role="alert">
+      <div class="bg-{{mess.tags}} me-3 icon-item"><span class="fas fa-check-circle text-white fs-3"></span></div>
+      <p class="mb-0 flex-1">{{mess}}!</p>
+      <button class="btn-close" type="button" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+<form action="/add_events/" enctype="multipart/form-data" method="POST"> {% csrf_token %}
+    <div class="container mt-4">
+    {{ form.as_p }}
+    <button class="btn btn-primary">Add Event</button>
+    </div>
+</form>

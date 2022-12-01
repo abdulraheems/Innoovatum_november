@@ -1,0 +1,56 @@
+{% load static %}
+ <!-- highlight js -->
+ <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/monokai-sublime.min.css">
+ <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+ <script>hljs.initHighlightingOnLoad();</script>
+ <!-- javascript add -->
+<script src="{% static 'js/eventmain.js'%}"></script>
+
+{% block content %}
+
+     <!-- add this code -->
+    {% if tag %}
+        <h2 class="mb-3">Posts tagged with "{{ tag.name }}"</h2>
+    {% endif %}
+    {% for event in events %}
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="row g-0">
+                <div class="col-md-5">
+                    <div class="ratio ratio-16x9">
+                        <img src="{{event.event_featured_image.url}}" class="rounded" alt="{{event.event_title}}">
+                    </div>
+                </div>
+                <div class="col-md-7 ps-md-3 pt-3 pt-md-0 d-flex flex-column">
+                    
+                        <h2 class="card-title h5">
+                                <a href="{{ event.get_absolute_url }}">
+                                {{ event.event_title }}
+                                </a>
+                        </h2>
+
+                        <div class="text-muted">
+                            <small>
+                                Published {{ event.publish.date }} by <strong>{{ event.event_author }}</strong>
+                            </small>
+                        </div>
+                        
+                        
+                        <p class="card-text mb-auto py-2">{{ event.event_body|safe|striptags|truncatechars:100 }}</p>
+                        
+                    
+               
+                        <div>
+                            <a href="{{ event.get_absolute_url }}" class="btn btn-primary btn-sm">Read more</a>
+                        </div>
+                
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    {% endfor %}
+
+    {% include "events/pagination.html" with page=events %}
+
+{% endblock content %}

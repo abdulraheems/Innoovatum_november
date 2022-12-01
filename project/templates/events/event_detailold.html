@@ -1,0 +1,100 @@
+{% load static %}
+ <!-- highlight js -->
+ <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/monokai-sublime.min.css">
+ <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+ <script>hljs.initHighlightingOnLoad();</script>
+ <!-- javascript add -->
+<script src="{% static 'js/eventmain.js'%}"></script>
+
+{% block title %} - {{event.event_title}}{% endblock title %}
+
+{% block content %}
+    <article>
+        <figure>
+         <img src="{{event.event_featured_image.url}}" class="rounded" alt="{{event.event_title}}">
+        </figure>
+        <div class="mt-3">
+            <h1>{{event.event_title}}</h1>
+            <p class="text-muted">
+                Published {{ event.publish.date }} by <strong>{{ event.event_author }}</strong>
+            </p>
+        </div>
+
+        <div class="article-body">
+                {{event.event_body|linebreaks|safe|striptags}}
+        </div>
+        
+    </article>
+
+    <p>
+        <strong>Tags:</strong>
+        {% for tag in event.tags.all %}
+            <a href="{% url 'events:event_tag' tag.slug %}" class="link-light text-decoration-none badge bg-secondary">
+                {{tag.name}}
+            </a>
+            <!-- {% if not forloop.last %}, {% endif %} -->
+        {% endfor %}
+    </p>
+
+    <hr/>
+        <h3>Add Comment</h3>
+        <form method="event" action="">
+            {% csrf_token %}
+            {{ comment_form.as_p }}
+            <button type="submit" class="btn btn-primary">Comment</button>
+        </form>
+
+    
+        {% with comments.count as total_comments %}
+            <h3 class="mt-5">
+                {{ total_comments }} comment{{ total_comments|pluralize }}
+            </h3>
+        {% endwith %}
+
+        {% if not event.comments.all %}
+            No comments yet
+        
+        {% else %}
+            {% for comment in event.get_comments %}
+                {% include 'comment.html' with comment=comment %}
+            {% endfor %}
+        {% endif %}
+
+
+        <hr />
+
+<div class="my-3">
+    <h3>Similar Events</h3>
+</div>
+<div class="row">
+    {% for event in similar_events %}
+    <div class="col-md-6 col-sm-6 col-lg-4 mb-3">
+        <div class="card border-0">
+            <div class="ratio ratio-16x9">
+                <img src="{{event.event_featured_image.url}}" class="rounded featured-image-list" alt="{{event.event_title}}">
+            </div>
+            <div class="card-body p-0 m-0 mt-2">
+                <h2 class="card-title h6 my-0 py-0">
+                    <a href="{{event.get_absolute_url}}">{{event.event_title}}</a>
+                </h2>
+                <p class="card-text">
+                    <small class="text-muted">
+                        <span>{{event.publish.date}} by
+                            <b>{{event.event_author}}</b></span>
+
+                        <!-- <a href="" class="badge badge-light text-muted">{{event.tags.all|join:" "}}</a> -->
+
+
+                    </small>
+                </p>
+                <!-- <p>{{event.body|truncatechars:100|linebreaks}}</p> -->
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p class="text-muted">There is no similar event yet</p>
+    {% endfor %}
+</div>
+    
+   
+{% endblock content %}
